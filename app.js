@@ -7,7 +7,7 @@ const stringify = value => {
   return value.toString();
 }
 
-const checkTypes = (types, props) => {
+const validate = (types, props) => {
   const propResults = Object.keys(types)
     .reduce((propResults, propId) => {
       const rule = types[propId];
@@ -21,9 +21,9 @@ const checkTypes = (types, props) => {
   return propResults;
 };
 
-module.exports.checkTypes = checkTypes;
+module.exports.validate = validate;
 
-const showTypes = types => {
+const explain = types => {
   return Object.keys(types)
     .filter(propId => types[propId].def.type !== 'hidden')
     .reduce((propResults, propId) => {
@@ -38,7 +38,7 @@ const showTypes = types => {
     }, {});
 };
 
-module.exports.showTypes = showTypes;
+module.exports.explain = explain;
 
 const any = (config = {}) => {
   const { required = false } = config;
@@ -224,14 +224,14 @@ const shape = (config = {}) => {
     def: {
       type: 'shape',
       required: stringify(required),
-      types: showTypes(types),
+      types: explain(types),
     },
     func: (value, props) => {
       const isRequired = (typeof required === 'function') ? required(props) : required;
       if (isRequired && isUndefined(value)) return error('propertype-missing');
       if (isUndefined(value)) return;
       if (typeof value !== 'object') return error('propertype-type');
-      const result = checkTypes(types, value);
+      const result = validate(types, value);
       if (Object.keys(result).length > 0) return result;
     },
     construct: value => Object.keys(types).reduce((obj, propId) => ({
