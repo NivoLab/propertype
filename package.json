@@ -1,0 +1,25 @@
+{
+  "name": "propertype",
+  "version": "1.0.0",
+  "description": "a struct constructor/validator for javascript",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poonzah/propertype.git"
+  },
+  "keywords": [
+    "struct",
+    "property",
+    "object",
+    "validation"
+  ],
+  "author": "Dariush Alipour <drsh.alipour@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/poonzah/propertype/issues"
+  },
+  "homepage": "https://github.com/poonzah/propertype#readme"
+}
