@@ -1,10 +1,39 @@
 # propertype
-a struct constructor/validator library
+a struct constructor/validator library. propertype is a tool to check if an object has the proper type on its properties. as a constructor, it will extract properties defined in its type out of the payload it has been given.
 
 ## installation
 ```sh
 $ npm i propertype --save
 ```
+
+## possible types
+- `any`: anything
+  - `required`: boolean - default: `false` - error: `propertype-required`
+- `boolean`: boolean or string of `'true'` or `'false'`
+  - `required`: boolean - default: `false` - error: `propertype-required`
+- `number`: number or a string of a number
+  - `required`: boolean - default: `false` - error: `propertype-required`
+  - `min`: minimum value - error: `propertype-number-min`
+  - `max`: maximum value - error: `propertype-number-max`
+- `string`: a string
+  - `required`: boolean - default: `false` - error: `propertype-required`
+  - `min`: minimum string length - error: `propertype-string-min`
+  - `max`: maximum string length - error: `propertype-string-max`
+  - `pattern`: a regex pattern to test against - default: `.*` - error: `propertype-string-pattern`
+- `object`: any object without caring about its properties
+  - `required`: boolean - default: `false` - error: `propertype-required`
+- `oneOf`: the value should equal one of the values in its options key
+  - `required`: boolean - default: `false` - error: `propertype-required`
+  - `options`: array of possible values - error: `propertype-oneof-options`
+- `arrayOf`: an array of a specific type
+  - `required`: boolean - default: `false` - error: `propertype-required`
+  - `min`: minimum array length - error: `propertype-array-min`
+  - `max`: maximum array length - error: `propertype-array-max`
+  - `type`: the specific type that all values in the array should be - default: `any`
+- `shape`: shape is like a nested propertype config
+  - `required`: boolean - default: `false` - error: `propertype-required`
+  - `types`: an object of property configurations, just like its top level one
+
 
 ## usage example
 ```js

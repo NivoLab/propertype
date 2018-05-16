@@ -10,7 +10,7 @@ module.exports = (config = {}) => {
   const construct = value => value;
   const validate = (value, props) => {
     const isRequired = (typeof required === 'function') ? required(props) : required;
-    if (isRequired && core.isUndefined(value)) return core.error('propertype-missing');
+    if (isRequired && core.isUndefined(value)) return core.error('propertype-required');
   };
 
   const output = construct;

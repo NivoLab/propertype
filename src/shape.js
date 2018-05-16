@@ -21,7 +21,7 @@ module.exports = (config = {}) => {
 
   const validate = (value, props) => {
     const isRequired = (typeof required === 'function') ? required(props) : required;
-    if (isRequired && core.isUndefined(value)) return core.error('propertype-missing');
+    if (isRequired && core.isUndefined(value)) return core.error('propertype-required');
     if (core.isUndefined(value)) return;
     if (typeof value !== 'object') return core.error('propertype-type');
     const result = core.validate(types, value);

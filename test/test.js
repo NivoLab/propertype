@@ -44,7 +44,7 @@ describe('Array', () => {
       assert.equal(Person.validate(payload), undefined);
     });
 
-    it('should return { name: \'propertype-missing\' }', () => {
+    it('should return { name: \'propertype-required\' }', () => {
       const payload = {
         gender: 'male',
         married: true,
@@ -58,7 +58,7 @@ describe('Array', () => {
         },
       };
 
-      assert.equal(Person.validate(payload).name, 'propertype-missing');
+      assert.equal(Person.validate(payload).name, 'propertype-required');
     });
   });
 
