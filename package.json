@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/poonzah/propertype.git"
+    "url": "git+https://github.com/nivolab/propertype.git"
   },
   "keywords": [
     "struct",
