@@ -1,6 +1,11 @@
 # propertype
 a struct constructor/validator library
 
+## installation
+```sh
+$ npm i propertype --save
+```
+
 ## usage example
 ```js
 const Propertype = require('propertype');
