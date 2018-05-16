@@ -3,18 +3,45 @@ a struct constructor/validator library
 
 ## usage example
 ```js
-import * as Propertype from 'propertype';
+const Propertype = require('propertype');
 
 // define a struct
-const Person = {
+const Person = Propertype({
   name: Propertype.string({ required: true, minLength: 3, maxLength: 255 }),
-  age: Propertype.number({ minValue: 13 }),
+  gender: Propertype.oneOf({ required: true, options: [ 'male', 'female' ] }),
+  married: Propertype.boolean,
+  age: Propertype.number, // you can skip parens if the default type config is good for you (required: false)
+  skills: Propertype.arrayOf({ required: true, type: Propertype.string }),
+  email: Propertype.email({ required: true }),
+  outfit: Propertype.shape({ types: {
+    shirtColor: Propertype.string,
+    jeansColor: Propertype.string,
+    sneakerSize: Propertype.number({ minValue: 30, maxValue: 50 }),
+  }}),
+  extras: Propertype.any,
+});
+
+const payload = {
+  name: 'Dariush Alipour',
+  gender: 'male',
+  married: true,
+  age: 26,
+  skills: ['js', 'golang'],
+  email: 'drsh.alipour@gmail.com',
+  outfit: {
+    shirtColor: 'black',
+    jeansColor: 'blue',
+    sneakerSize: 55,
+  },
 };
 
 // check/validate types
-const errors = Propertype.validate(Person, { name: 'Dariush Alipour', age: 25 });
+const errors = Person.validate(payload); // return: { outfit: { sneakerSize: 'propertype-number-max' } }
 
 // explain type rules
-const rules = Propertype.explain(Person);
+const rules = Person.explain();
+
+// construct one
+const person = Person(payload);
 
 ```
