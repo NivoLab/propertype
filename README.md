@@ -7,7 +7,7 @@ const Propertype = require('propertype');
 
 // define a struct
 const Person = Propertype({
-  name: Propertype.string({ required: true, minLength: 3, maxLength: 255 }),
+  name: Propertype.string({ required: true, min: 3, max: 255 }),
   gender: Propertype.oneOf({ required: true, options: [ 'male', 'female' ] }),
   married: Propertype.boolean,
   age: Propertype.number, // you can skip parens if the default type config is good for you (required: false)
@@ -16,7 +16,7 @@ const Person = Propertype({
   outfit: Propertype.shape({ types: {
     shirtColor: Propertype.string,
     jeansColor: Propertype.string,
-    sneakerSize: Propertype.number({ minValue: 30, maxValue: 50 }),
+    sneakerSize: Propertype.number({ min: 30, max: 50 }),
   }}),
   extras: Propertype.any,
 });
