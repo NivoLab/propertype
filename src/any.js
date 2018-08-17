@@ -1,6 +1,6 @@
 const core = require('./core.js');
 
-module.exports = (config = {}) => {
+const _any = core.createType(config => {
   const { required = false } = config;
 
   const def = {
@@ -19,4 +19,6 @@ module.exports = (config = {}) => {
   output.validate = validate;
 
   return output;
-};
+});
+
+module.exports = _any;

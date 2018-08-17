@@ -14,6 +14,14 @@ const stringify = value => {
 
 module.exports.stringify = stringify;
 
+const createType = function (_type) {
+  const type = (config = {}) => _type(config);
+  type.required = (config = {}) => type({ ...config, required: true });
+  return type;
+};
+
+module.exports.createType = createType;
+
 const validate = (types, props) => {
   const propResults = Object.keys(types)
     .reduce((propResults, propId) => {

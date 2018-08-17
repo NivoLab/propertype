@@ -1,7 +1,7 @@
 const core = require('./core.js');
 const string = require('./string.js');
 
-module.exports = (config = {}) => {
+const _email = core.createType(config => {
   const { required = false } = config;
 
   // eslint-disable-next-line no-useless-escape
@@ -21,4 +21,6 @@ module.exports = (config = {}) => {
   output.validate = validate;
 
   return output;
-};
+});
+
+module.exports = _email;

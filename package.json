@@ -1,6 +1,6 @@
 {
   "name": "propertype",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "a struct constructor/validator for javascript",
   "main": "app.js",
   "scripts": {
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/poonzah/propertype/issues"
   },
-  "homepage": "https://github.com/poonzah/propertype#readme"
+  "homepage": "https://github.com/poonzah/propertype#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
 }

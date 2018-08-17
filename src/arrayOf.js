@@ -1,7 +1,7 @@
 const core = require('./core.js');
 const any = require('./any.js');
 
-module.exports = (config = {}) => {
+const _arrayOf = core.createType(config => {
   const { required = false, min, max, type: _type = any() } = config;
 
   const type = ('validate' in _type) ? _type : _type();
@@ -31,4 +31,6 @@ module.exports = (config = {}) => {
   output.validate = validate;
 
   return output;
-}
+});
+
+module.exports = _arrayOf;

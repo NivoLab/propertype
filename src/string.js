@@ -1,6 +1,6 @@
 const core = require('./core.js');
 
-module.exports = (config = {}) => {
+const _string = core.createType(config => {
   const { required = false, min, max, pattern = '.*' } = config;
 
   const def = {
@@ -29,4 +29,6 @@ module.exports = (config = {}) => {
   output.validate = validate;
 
   return output;
-};
+});
+
+module.exports = _string;

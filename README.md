@@ -46,7 +46,7 @@ const Person = Propertype({
   married: Propertype.boolean,
   age: Propertype.number, // you can skip parens if the default type config is good for you (required: false)
   skills: Propertype.arrayOf({ required: true, type: Propertype.string }),
-  email: Propertype.email({ required: true }),
+  email: Propertype.email.required, // that's right! you can do this just like prop-types allows you
   outfit: Propertype.shape({ types: {
     shirtColor: Propertype.string,
     jeansColor: Propertype.string,

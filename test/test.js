@@ -7,13 +7,13 @@ const Person = Propertype({
   // to test oneOf
   gender: Propertype.oneOf({ required: true, options: [ 'male', 'female' ] }),
   // to test boolean
-  married: Propertype.boolean,
+  married: Propertype.boolean.required,
   // to test number
   age: Propertype.number,
   // to test arrayOf
   skills: Propertype.arrayOf({ required: true, type: Propertype.string }),
   // to test email
-  email: Propertype.email({ required: true }),
+  email: Propertype.email.required,
   // to test shape
   outfit: Propertype.shape({ types: {
     shirtColor: Propertype.string,
@@ -59,6 +59,23 @@ describe('Array', () => {
       };
 
       assert.equal(Person.validate(payload).name, 'propertype-required');
+    });
+
+    it('should return { email: \'propertype-required\' }', () => {
+      const payload = {
+        name: 'Dariush Alipour',
+        gender: 'male',
+        married: true,
+        age: 26,
+        skills: ['js', 'golang'],
+        outfit: {
+          shirtColor: 'black',
+          jeansColor: 'blue',
+          sneakerSize: 47,
+        },
+      };
+
+      assert.equal(Person.validate(payload).email, 'propertype-required');
     });
   });
 

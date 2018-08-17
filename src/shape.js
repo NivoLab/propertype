@@ -1,6 +1,6 @@
 const core = require('./core.js');
 
-module.exports = (config = {}) => {
+const _shape = core.createType(config => {
   const { required = false, types: _types = {} } = config;
 
   const types = Object.keys(_types).reduce((acc, propId) => ({
@@ -35,4 +35,6 @@ module.exports = (config = {}) => {
   output.explain = () => core.explain(types);
 
   return output;
-};
+});
+
+module.exports = _shape;
