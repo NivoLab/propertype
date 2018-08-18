@@ -5,7 +5,7 @@ const Person = Propertype({
   // to test string
   name: Propertype.string({ required: true, minLength: 3, maxLength: 255 }),
   // to test oneOf
-  gender: Propertype.oneOf({ required: true, options: [ 'male', 'female' ] }),
+  gender: Propertype.oneOf({ required: true, options: ['male', 'female'] }),
   // to test boolean
   married: Propertype.boolean.required,
   // to test number
@@ -15,11 +15,13 @@ const Person = Propertype({
   // to test email
   email: Propertype.email.required,
   // to test shape
-  outfit: Propertype.shape({ types: {
-    shirtColor: Propertype.string,
-    jeansColor: Propertype.string,
-    sneakerSize: Propertype.number,
-  }}),
+  outfit: Propertype.shape({
+    types: {
+      shirtColor: Propertype.string,
+      jeansColor: Propertype.string,
+      sneakerSize: Propertype.number,
+    }
+  }),
   // to test any
   extras: Propertype.any,
 });
@@ -42,6 +44,23 @@ describe('Array', () => {
       };
 
       assert.equal(Person.validate(payload), undefined);
+    });
+
+    it('should throw ValidationError', () => {
+      const payload = {
+        gender: 'male',
+        married: true,
+        age: 26,
+        skills: ['js', 'golang'],
+        email: 'drsh.alipour@gmail.com',
+        outfit: {
+          shirtColor: 'black',
+          jeansColor: 'blue',
+          sneakerSize: 47,
+        },
+      };
+
+      assert.throws(() => Person(payload), { name: 'ValidationError' });
     });
 
     it('should return { name: \'propertype-required\' }', () => {

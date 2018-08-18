@@ -69,13 +69,29 @@ const payload = {
   },
 };
 
-// check/validate types
+// only check/validate types
 const errors = Person.validate(payload); // return: { outfit: { sneakerSize: 'propertype-number-max' } }
 
 // explain type rules
 const rules = Person.explain();
 
 // construct one
-const person = Person(payload);
+let person;
+try {
+  person = Person(payload);
+} catch(err) {
+  /*
+    err equals ValidationError {
+      code: 400,
+      name: 'ValidationError',
+      message: 'There are one or more errors in pre-construct validation',
+      info: {
+        outfit: {
+          sneakerSize: 'propertype-number-max',
+        },
+      },
+    }
+  */
+}
 
 ```

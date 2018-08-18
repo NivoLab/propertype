@@ -8,7 +8,7 @@ const oneOf = require('./oneOf.js');
 const arrayOf = require('./arrayOf.js');
 const shape = require('./shape.js');
 
-const Propertype = types =>  shape({ required: true, types });
+const Propertype = types => shape({ required: true, types });
 Propertype.any = any;
 Propertype.boolean = boolean;
 Propertype.string = string;

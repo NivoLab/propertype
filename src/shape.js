@@ -1,12 +1,22 @@
 const core = require('./core.js');
 
+function ValidationError(info) {
+  this.code = 400;
+  this.name = 'ValidationError';
+  this.message = 'There are one or more errors in pre-construct validation';
+  this.info = info;
+  this.toString = function () {
+    return `${this.name}: ${this.message};${JSON.stringify(this.info)}`;
+  };
+}
+
 const _shape = core.createType(config => {
   const { required = false, types: _types = {} } = config;
 
   const types = Object.keys(_types).reduce((acc, propId) => ({
     ...acc,
     [propId]: ('validate' in _types[propId]) ? _types[propId] : _types[propId](),
-  }) ,{});
+  }), {});
 
   const def = {
     type: 'shape',
@@ -28,7 +38,12 @@ const _shape = core.createType(config => {
     if (Object.keys(result).length > 0) return result;
   };
 
-  const output = construct;
+  const output = props => {
+    const errors = validate(props);
+    if (errors) throw new ValidationError(errors);
+    return construct(props);
+  }
+
   output.construct = construct;
   output.def = def;
   output.validate = validate;
